@@ -7,8 +7,6 @@ import {localUserStore} from "./LocalUserStore";
 import {LocalUser} from "./LocalUser";
 import {Room} from "./Room";
 
-const URL_ROOM_STARTED = 'tcm/workadventure/floor0';
-
 class ConnectionManager {
     private localUser!:LocalUser;
 
@@ -33,7 +31,7 @@ class ConnectionManager {
 
             const room = new Room(window.location.pathname + window.location.hash);
             return Promise.resolve(room);
-        } else if (connexionType === GameConnexionTypes.organization || connexionType === GameConnexionTypes.anonymous || connexionType === GameConnexionTypes.empty) {
+        } else if (connexionType === GameConnexionTypes.organization || connexionType === GameConnexionTypes.anonymous) {
             const localUser = localUserStore.getLocalUser();
 
             if (localUser && localUser.jwtToken && localUser.uuid && localUser.textures) {
@@ -48,12 +46,7 @@ class ConnectionManager {
             } else {
                 await this.anonymousLogin();
             }
-            let roomId: string
-            if (connexionType === GameConnexionTypes.empty) {
-                roomId = urlManager.editUrlForRoom(URL_ROOM_STARTED, null, null);
-            } else {
-                roomId = window.location.pathname + window.location.hash;
-            }
+            const roomId = window.location.pathname + window.location.hash;
             return Promise.resolve(new Room(roomId));
         }
 
