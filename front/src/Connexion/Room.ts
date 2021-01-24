@@ -3,7 +3,6 @@ import {API_URL} from "../Enum/EnvironmentVariable";
 
 export class Room {
     public readonly id: string;
-    public readonly isPublic: boolean;
     private mapUrl: string|undefined;
     private instance: string|undefined;
 
@@ -12,11 +11,7 @@ export class Room {
             id = id.substr(1);
         }
         this.id = id;
-        if (id.startsWith('_/')) {
-            this.isPublic = true;
-        } else if (id.startsWith('@/')) {
-            this.isPublic = false;
-        } else {
+        if (!id.startsWith('@/') && !id.startsWith('_/')) {
             throw new Error('Invalid room ID');
         }
 
@@ -29,7 +24,7 @@ export class Room {
     public static getIdFromIdentifier(identifier: string, baseUrl: string, currentInstance: string): {roomId: string, hash: string} {
         let roomId = '';
         let hash = '';
-        if (!identifier.startsWith('/_/') && !identifier.startsWith('/@/')) { //relative file link
+        if (!identifier.startsWith('/@/') && !identifier.startsWith('/_/')) { //relative file link
             //Relative identifier can be deep enough to rewrite the base domain, so we cannot use the variable 'baseUrl' as the actual base url for the URL objects.
             //We instead use 'workadventure' as a dummy base value.
             const baseUrlObject = new URL(baseUrl);
@@ -56,26 +51,9 @@ export class Room {
                 return;
             }
 
-            if (this.isPublic) {
-                const match = /_\/[^/]+\/(.+)/.exec(this.id);
-                if (!match) throw new Error('Could not extract url from "'+this.id+'"');
-                this.mapUrl = window.location.protocol+'//'+match[1];
-                resolve(this.mapUrl);
-                return;
-            } else {
-                // We have a private ID, we need to query the map URL from the server.
-                const urlParts = this.parsePrivateUrl(this.id);
-
-                Axios.get(`${API_URL}/map`, {
-                    params: urlParts
-                }).then(({data}) => {
-                    console.log('Map ', this.id, ' resolves to URL ', data.mapUrl);
-                    resolve(data.mapUrl);
-                    return;
-                }).catch((reason) => {
-                    reject(reason);
-                });
-            }
+            const urlParts = this.parsePrivateUrl(this.id);
+            this.mapUrl = window.location.protocol+'//play.workadventure.localhost/resources/maps/'+urlParts.roomSlug+'/map.json';
+            resolve(this.mapUrl);
         });
     }
 
@@ -89,31 +67,21 @@ export class Room {
             return this.instance;
         }
 
-        if (this.isPublic) {
-            const match = /_\/([^/]+)\/.+/.exec(this.id);
-            if (!match) throw new Error('Could not extract instance from "'+this.id+'"');
-            this.instance = match[1];
-            return this.instance;
-        } else {
-            const match = /@\/([^/]+)\/([^/]+)\/.+/.exec(this.id);
-            if (!match) throw new Error('Could not extract instance from "'+this.id+'"');
-            this.instance = match[1]+'/'+match[2];
-            return this.instance;
-        }
+        const match = /[@_]\/([^/]+)\/([^/]+)/.exec(this.id);
+        if (!match) throw new Error('Could not extract instance from "'+this.id+'"');
+        this.instance = match[1]+'/'+match[2];
+        return this.instance;
     }
 
-    private parsePrivateUrl(url: string): { organizationSlug: string, worldSlug: string, roomSlug?: string } {
-        const regex = /@\/([^/]+)\/([^/]+)(?:\/([^/]*))?/gm;
+    private parsePrivateUrl(url: string): { worldSlug: string, roomSlug: string } {
+        const regex = /@\/([^/]+)\/([^/]+)/gm;
         const match = regex.exec(url);
         if (!match) {
             throw new Error('Invalid URL '+url);
         }
-        const results: { organizationSlug: string, worldSlug: string, roomSlug?: string } = {
-            organizationSlug: match[1],
+        const results: { worldSlug: string, roomSlug: string } = {
+            roomSlug: match[1],
             worldSlug: match[2],
-        }
-        if (match[3] !== undefined) {
-            results.roomSlug = match[3];
         }
         return results;
     }

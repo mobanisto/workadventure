@@ -521,7 +521,7 @@ export class GameScene extends ResizableScene implements CenterListener {
             });
 
             // When connection is performed, let's connect SimplePeer
-            this.simplePeer = new SimplePeer(this.connection, !this.room.isPublic, this.playerName);
+            this.simplePeer = new SimplePeer(this.connection, true, this.playerName);
             this.GlobalMessageManager = new GlobalMessageManager(this.connection);
             this.UserMessageManager = new UserMessageManager(this.connection);
 
