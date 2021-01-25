@@ -41,7 +41,7 @@ export class Room {
             }
 
             const urlParts = this.parsePrivateUrl(this.id);
-            this.mapUrl = window.location.protocol+'//play.workadventure.localhost/resources/maps/'+urlParts.roomSlug+'/map.json';
+            this.mapUrl = window.location.protocol+'//'+window.location.hostname+'/resources/maps/'+urlParts.roomSlug+'/map.json';
             resolve(this.mapUrl);
         });
     }
