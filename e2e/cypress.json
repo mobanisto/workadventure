@@ -1,5 +1,5 @@
 {
-	"baseUrl": "http://workadventure.localhost",
+	"baseUrl": "http://vparty.mobanisto.de",
 	"video": false,
 	"defaultCommandTimeout": 20000,
 	"pluginsFile": false,
