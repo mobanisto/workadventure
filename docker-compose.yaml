@@ -37,10 +37,10 @@ services:
     volumes:
       - ./front:/usr/src/app
     labels:
-      - "traefik.http.routers.front.rule=Host(`play.vparty.mobanisto.de`)"
+      - "traefik.http.routers.front.rule=Host(`vparty.mobanisto.de`)"
       - "traefik.http.routers.front.entryPoints=web,traefik"
       - "traefik.http.services.front.loadbalancer.server.port=8080"
-      - "traefik.http.routers.front-ssl.rule=Host(`play.vparty.mobanisto.de`)"
+      - "traefik.http.routers.front-ssl.rule=Host(`vparty.mobanisto.de`)"
       - "traefik.http.routers.front-ssl.entryPoints=websecure"
       - "traefik.http.routers.front-ssl.tls=true"
       - "traefik.http.routers.front-ssl.service=front"
