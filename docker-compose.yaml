@@ -30,7 +30,7 @@ services:
       UPLOADER_URL: uploader.vparty.mobanisto.de
       ADMIN_URL: admin.vparty.mobanisto.de
       STARTUP_COMMAND_1: yarn install
-      TURN_SERVER: "turn:coturn.workadventu.re:443,turns:coturn.workadventu.re:443"
+      TURN_SERVER: "turn:talk.mobanisto.de:443,turns:talk.mobanisto.de:443"
       TURN_USER: workadventure
       TURN_PASSWORD: WorkAdventure123
     command: yarn run start
