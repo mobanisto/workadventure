@@ -31,8 +31,8 @@ services:
       ADMIN_URL: admin.vparty.mobanisto.de
       STARTUP_COMMAND_1: yarn install
       TURN_SERVER: "turn:talk.mobanisto.de:443,turns:talk.mobanisto.de:443"
-      TURN_USER: workadventure
-      TURN_PASSWORD: WorkAdventure123
+      TURN_USER: virtualevent
+      TURN_PASSWORD: winter-is-coming
     command: yarn run start
     volumes:
       - ./front:/usr/src/app
