@@ -22,7 +22,7 @@ services:
     image: thecodingmachine/nodejs:14
     environment:
       DEBUG_MODE: "$DEBUG_MODE"
-      JITSI_URL: "www.kuketz-meet.de"
+      JITSI_URL: "meet.jit.si"
       JITSI_PRIVATE_MODE: "$JITSI_PRIVATE_MODE"
       HOST: "0.0.0.0"
       NODE_ENV: development
