@@ -26,9 +26,9 @@ services:
       JITSI_PRIVATE_MODE: "$JITSI_PRIVATE_MODE"
       HOST: "0.0.0.0"
       NODE_ENV: development
-      API_URL: pusher.vparty.mobanisto.de
-      UPLOADER_URL: uploader.vparty.mobanisto.de
-      ADMIN_URL: admin.vparty.mobanisto.de
+      API_URL: pusher.meet.mobanisto.de
+      UPLOADER_URL: uploader.meet.mobanisto.de
+      ADMIN_URL: admin.meet.mobanisto.de
       STARTUP_COMMAND_1: yarn install
       TURN_SERVER: "turn:talk.mobanisto.de:443,turns:talk.mobanisto.de:443"
       TURN_USER: virtualevent
@@ -37,10 +37,10 @@ services:
     volumes:
       - ./front:/usr/src/app
     labels:
-      - "traefik.http.routers.front.rule=Host(`vparty.mobanisto.de`)"
+      - "traefik.http.routers.front.rule=Host(`meet.mobanisto.de`)"
       - "traefik.http.routers.front.entryPoints=web,traefik"
       - "traefik.http.services.front.loadbalancer.server.port=8080"
-      - "traefik.http.routers.front-ssl.rule=Host(`vparty.mobanisto.de`)"
+      - "traefik.http.routers.front-ssl.rule=Host(`meet.mobanisto.de`)"
       - "traefik.http.routers.front-ssl.entryPoints=websecure"
       - "traefik.http.routers.front-ssl.tls=true"
       - "traefik.http.routers.front-ssl.service=front"
@@ -62,10 +62,10 @@ services:
     volumes:
       - ./pusher:/usr/src/app
     labels:
-      - "traefik.http.routers.pusher.rule=Host(`pusher.vparty.mobanisto.de`)"
+      - "traefik.http.routers.pusher.rule=Host(`pusher.meet.mobanisto.de`)"
       - "traefik.http.routers.pusher.entryPoints=web"
       - "traefik.http.services.pusher.loadbalancer.server.port=8080"
-      - "traefik.http.routers.pusher-ssl.rule=Host(`pusher.vparty.mobanisto.de`)"
+      - "traefik.http.routers.pusher-ssl.rule=Host(`pusher.meet.mobanisto.de`)"
       - "traefik.http.routers.pusher-ssl.entryPoints=websecure"
       - "traefik.http.routers.pusher-ssl.tls=true"
       - "traefik.http.routers.pusher-ssl.service=pusher"
@@ -85,10 +85,10 @@ services:
     volumes:
       - ./maps:/var/www/html
     labels:
-      - "traefik.http.routers.maps.rule=Host(`maps.vparty.mobanisto.de`)"
+      - "traefik.http.routers.maps.rule=Host(`maps.meet.mobanisto.de`)"
       - "traefik.http.routers.maps.entryPoints=web,traefik"
       - "traefik.http.services.maps.loadbalancer.server.port=80"
-      - "traefik.http.routers.maps-ssl.rule=Host(`maps.vparty.mobanisto.de`)"
+      - "traefik.http.routers.maps-ssl.rule=Host(`maps.meet.mobanisto.de`)"
       - "traefik.http.routers.maps-ssl.entryPoints=websecure"
       - "traefik.http.routers.maps-ssl.tls=true"
       - "traefik.http.routers.maps-ssl.service=maps"
@@ -109,10 +109,10 @@ services:
     volumes:
       - ./back:/usr/src/app
     labels:
-      - "traefik.http.routers.back.rule=Host(`api.vparty.mobanisto.de`)"
+      - "traefik.http.routers.back.rule=Host(`api.meet.mobanisto.de`)"
       - "traefik.http.routers.back.entryPoints=web"
       - "traefik.http.services.back.loadbalancer.server.port=8080"
-      - "traefik.http.routers.back-ssl.rule=Host(`api.vparty.mobanisto.de`)"
+      - "traefik.http.routers.back-ssl.rule=Host(`api.meet.mobanisto.de`)"
       - "traefik.http.routers.back-ssl.entryPoints=websecure"
       - "traefik.http.routers.back-ssl.tls=true"
       - "traefik.http.routers.back-ssl.service=back"
@@ -127,10 +127,10 @@ services:
     volumes:
       - ./uploader:/usr/src/app
     labels:
-      - "traefik.http.routers.uploader.rule=Host(`uploader.vparty.mobanisto.de`)"
+      - "traefik.http.routers.uploader.rule=Host(`uploader.meet.mobanisto.de`)"
       - "traefik.http.routers.uploader.entryPoints=web"
       - "traefik.http.services.uploader.loadbalancer.server.port=8080"
-      - "traefik.http.routers.uploader-ssl.rule=Host(`uploader.vparty.mobanisto.de`)"
+      - "traefik.http.routers.uploader-ssl.rule=Host(`uploader.meet.mobanisto.de`)"
       - "traefik.http.routers.uploader-ssl.entryPoints=websecure"
       - "traefik.http.routers.uploader-ssl.tls=true"
       - "traefik.http.routers.uploader-ssl.service=uploader"
