@@ -21,9 +21,11 @@ Install Docker.
 
 Run:
 
-```
-docker-compose up
-```
+    docker-compose up
+
+Run development mode:
+
+    docker-compose -f docker-compose-dev.yaml up
 
 The environment will start.
 
