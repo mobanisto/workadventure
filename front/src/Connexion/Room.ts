@@ -41,7 +41,7 @@ export class Room {
             }
 
             const urlParts = this.parsePrivateUrl(this.id);
-            this.mapUrl = window.location.protocol+'//'+window.location.hostname+'/resources/maps/'+urlParts.roomSlug+'/map.json';
+            this.mapUrl = 'https://virtualmaps.mobanisto.de/files/'+urlParts.roomSlug+'/map.json';
             resolve(this.mapUrl);
         });
     }
@@ -56,21 +56,21 @@ export class Room {
             return this.instance;
         }
 
-        const match = /[@_]\/([^/]+)\/([^/]+)/.exec(this.id);
+        const match = /[@_]\/([^/]+)/.exec(this.id);
         if (!match) throw new Error('Could not extract instance from "'+this.id+'"');
-        this.instance = match[1]+'/'+match[2];
+        this.instance = match[1];
         return this.instance;
     }
 
     private parsePrivateUrl(url: string): { worldSlug: string, roomSlug: string } {
-        const regex = /@\/([^/]+)\/([^/]+)/gm;
+        const regex = /@\/([^/]+)/gm;
         const match = regex.exec(url);
         if (!match) {
             throw new Error('Invalid URL '+url);
         }
         const results: { worldSlug: string, roomSlug: string } = {
             roomSlug: match[1],
-            worldSlug: match[2],
+            worldSlug: 'mainworld',
         }
         return results;
     }

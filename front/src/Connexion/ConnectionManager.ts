@@ -46,12 +46,12 @@ class ConnectionManager {
             } else {
                 await this.anonymousLogin();
             }
-            const regex = /@\/([^/]+)\/([^/]+)/gm;
+            const regex = /@\/([^/]+)/gm;
             const match = regex.exec(window.location.pathname);
             if (!match) {
                 return Promise.reject('Invalid URL');
             }
-            return Promise.resolve(new Room('/@/'+match[1]+'/'+match[2]));
+            return Promise.resolve(new Room('/@/'+match[1]));
         }
 
         return Promise.reject('Invalid URL');
