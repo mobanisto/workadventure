@@ -229,9 +229,6 @@ export class MenuScene extends Phaser.Scene {
                 this.closeSideMenu();
                 gameManager.leaveGame(this, LoginSceneName, new LoginScene());
                 break;
-            case 'sparkButton':
-                this.gotToCreateMapPage();
-                break;
             case 'changeSkinButton':
                 this.closeSideMenu();
                 gameManager.leaveGame(this, SelectCharacterSceneName, new SelectCharacterScene());
@@ -244,6 +241,12 @@ export class MenuScene extends Phaser.Scene {
                 break;
             case 'editGameSettingsButton':
                 this.openGameSettingsMenu();
+                break;
+            case 'showImpressum':
+                window.open('http://mobanisto.de/imprint', '_blank');
+                break;
+            case 'showDatenschutz':
+                window.open('http://mobanisto.de/privacy-policy', '_blank');
                 break;
             case 'adminConsoleButton':
                 gameManager.getCurrentGameScene(this).ConsoleGlobalMessageManager.activeMessageConsole();
@@ -270,11 +273,6 @@ export class MenuScene extends Phaser.Scene {
             mediaManager.updateCameraQuality(valueVideo);
         }
         this.closeGameQualityMenu();
-    }
-
-    private gotToCreateMapPage() {
-        const sparkHost = 'https://'+window.location.host.replace('play.', '')+'/choose-map.html';
-        window.open(sparkHost, '_blank');
     }
 
     private closeAll(){
