@@ -78,7 +78,7 @@ export class CustomizeScene extends ResizableScene {
 
         this.enterField = new TextField(this, this.game.renderer.width / 2, 40, 'you can start the game by pressing SPACE..');
 
-        this.logo = new Image(this, this.game.renderer.width - 30, this.game.renderer.height - 20, CustomizeTextures.icon);
+        this.logo = new Image(this, this.game.renderer.width - 60, this.game.renderer.height - 20, CustomizeTextures.icon);
         this.add.existing(this.logo);
 
 

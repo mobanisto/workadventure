@@ -47,7 +47,7 @@ export class LoginScene extends ResizableScene {
 
         this.pressReturnField = new TextField(this, this.game.renderer.width / 2, 130, 'Press enter to start');
 
-        this.logo = new Image(this, this.game.renderer.width - 30, this.game.renderer.height - 20, LoginTextures.icon);
+        this.logo = new Image(this, this.game.renderer.width - 60, this.game.renderer.height - 20, LoginTextures.icon);
         this.add.existing(this.logo);
 
         const infoText = "Commands: \n - Arrows or Z,Q,S,D to move\n - SHIFT to run";
