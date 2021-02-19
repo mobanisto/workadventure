@@ -248,6 +248,9 @@ export class MenuScene extends Phaser.Scene {
             case 'showDatenschutz':
                 window.open('http://mobanisto.de/privacy-policy', '_blank');
                 break;
+            case 'showCredits':
+                window.open('https://wahlkampfstand.online/credits', '_blank');
+                break;
             case 'adminConsoleButton':
                 gameManager.getCurrentGameScene(this).ConsoleGlobalMessageManager.activeMessageConsole();
                 break;
