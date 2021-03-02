@@ -601,7 +601,10 @@ export class GameScene extends ResizableScene implements CenterListener {
             audioManager.unloadAudio();
         } else {
             const mapDirUrl = this.MapUrlFile.substr(0, this.MapUrlFile.lastIndexOf('/'));
-            const realAudioPath = mapDirUrl + '/' + url;
+            var realAudioPath = '' + url;
+            if (!mapDirUrl.startsWith('http://') && !mapDirUrl.startsWith('https://')) {
+                realAudioPath = mapDirUrl + '/' + url;
+            }
             audioManager.loadAudio(realAudioPath);
 
             if (loop) {
